@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "cypress open"
+    "test": "npx cypress run --headless"
   },
   "dependencies": {
     "axios": "^0.21.1",
