@@ -1,0 +1,21 @@
+{
+  "name": "crypto-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "cypress open"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "coingecko-api": "^1.0.10",
+    "dateformat": "^4.5.1",
+    "millify": "^4.0.0",
+    "next": "10.2.2",
+    "nprogress": "^0.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
