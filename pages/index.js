@@ -5,29 +5,9 @@ const CoinGeckoClient = new CoinGecko();
 import millify from "millify";
 import dateFormat from 'dateformat'
 import Link from 'next/link'
+import ScrollToTop from 'react-scroll-to-top'
 
 export default function Home({data}) {
-  // const [scrollindex, setScrollIndex] = useState(100)
-  // const handleScroll = () => {
-
-  //   const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight
-
-  //   if (bottom) {
-  //     setScrollIndex(index + 100)
-  //   }
-  // };
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll, {
-  //     passive: true
-  //   });
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-
-  
-
   return (
     <div>
       <Head>
@@ -37,7 +17,7 @@ export default function Home({data}) {
       </Head>
 
       <main>
-      {data.length > 0 ? (
+      <ScrollToTop smooth />
         <ul className="responsive-table">
           <li className="table-header">
             <div className="col col-1">#</div>
@@ -52,7 +32,7 @@ export default function Home({data}) {
               {data.map((coin, index) => {
                 return (
                 <li className="table-row" key={coin.id}>
-                    <div className="col col-1" data-label="Crypto Index">{index+1}</div>
+                    <div className="col col-1" data-label="Index">{index+1}</div>
                     <div className="col col-2" data-label="Crypto Name">       
                       <Link href={`coin/${coin.id}`}>
                         <div className="coinlink" >
@@ -61,43 +41,33 @@ export default function Home({data}) {
                         </div>
                       </Link> 
                     </div>
-              <div className="col col-3" data-label="Amount">
+              <div className="col col-3" data-label="Price: ">
                 ${coin.market_data.current_price.usd}
               </div>
-              <div className={coin.market_data.price_change_percentage_24h >= 0 ? "col col-4 green" : "col col-4 red"} data-label="Amount">
+              <div className={coin.market_data.price_change_percentage_24h >= 0 ? "col col-4 green" : "col col-4 red"} data-label="24h %: ">
                 {coin.market_data.price_change_percentage_24h.toFixed(2)}%
               </div>
 
             <div className={coin.market_data.price_change_percentage_7d >= 0 ? "col col-5 green" : "col col-5 red"} data-label="Payment Status">
                 {coin.market_data.price_change_percentage_7d.toFixed(2)}%
             </div>
-            <div className="col col-6" data-label="Payment Status">
+            <div className="col col-6" data-label="Market Cap">
                 ${millify(coin.market_data.market_cap.usd, {
                   precision: 3
                 })}
             </div>
-            <div className="col col-7" data-label="Payment Status">
+            <div className="col col-7" data-label="Total Volume">
               {millify(coin.market_data.total_volume.usd, {
                 precision: 3
               })}
             </div>
-            <div className="col col-8" data-label="Payment Status">
+            <div className="col col-8" data-label="Last Updated">
                 {dateFormat(coin.last_updated,  "mmmm dS, yyyy, h:MM:ss TT").toString()}
             </div>
             </li>
           )}
           )} 
           </ul>
-              ) : (
-              <div className="loader">
-                <div className="face">
-                  <div className="circle"></div>
-                </div>
-                <div className="face">
-                  <div className="circle"></div>
-                </div>
-            </div>
-            )}
       </main> 
 
       <footer>
