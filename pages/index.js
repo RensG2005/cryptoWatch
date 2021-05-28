@@ -6,18 +6,9 @@ import millify from "millify";
 import dateFormat from 'dateformat'
 import Link from 'next/link'
 import ScrollToTop from 'react-scroll-to-top'
-import Aos from 'aos'
-import "aos/dist/aos.css"
-import { useEffect } from "react"
+
 
 export default function Home({data}) {
-
-  useEffect(() => {
-    Aos.init({
-      duration: 200,
-      offset: 10,
-    })
-  }, [])
 
   return (
     <div>

@@ -2,6 +2,10 @@ import '../styles/globals.css'
 import Link from 'next/link'
 import Router from 'next/router'
 import NProgress from 'nprogress'
+import { useEffect } from "react";
+import AOS from "aos";
+
+import "aos/dist/aos.css";
 
 NProgress.configure({ showSpinner: false });
 Router.onRouteChangeStart = () => {
@@ -12,6 +16,13 @@ Router.onRouteChangeError = () => NProgress.done()
 
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+		AOS.init({
+			delay: 300,
+			duration: 200,
+      offset: 10,
+		});
+	});
   return (
     <>
       <header>
