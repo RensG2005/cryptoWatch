@@ -9,21 +9,13 @@ import ScrollToTop from 'react-scroll-to-top'
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import { useEffect } from "react"
-import useWindowDimensions from "../hooks/useWindowsDimensions"
 
 export default function Home({data}) {
-
-  if (typeof window !== 'undefined') {
-    // detect window screen width function
-      const { height, width } = useWindowDimensions();
-      console.log(height, width)
-  }
 
   useEffect(() => {
     Aos.init({
       duration: 200,
       offset: 10,
-      disable: 'mobile'
     })
   }, [])
 
@@ -107,7 +99,6 @@ export async function getServerSideProps(context) {
         }
       }
   } catch (err) {
-    console.log(err)
     return {
       redirect: {
         destination: '/404',
