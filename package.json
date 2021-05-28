@@ -9,11 +9,11 @@
     "test": "npx cypress run --headless"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "coingecko-api": "^1.0.10",
     "dateformat": "^4.5.1",
     "millify": "^4.0.0",
-    "new-scroll-animations": "^1.0.1",
     "next": "10.2.2",
     "nprogress": "^0.2.0",
     "react": "17.0.2",
