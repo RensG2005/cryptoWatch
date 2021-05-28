@@ -42,6 +42,10 @@ footer {
   align-items: center;
 }
 
+footer p {
+  text-align: center;
+}
+
 
 .red {
   color: #ea3943;

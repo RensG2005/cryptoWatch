@@ -1,20 +1,29 @@
 import Head from 'next/head'
 import Image from 'next/image'
-const CoinGecko = require('coingecko-api');
-const CoinGeckoClient = new CoinGecko();
+import CoinGecko from 'coingecko-api'
+const CoinGeckoClient = new CoinGecko()
 import millify from "millify";
 import dateFormat from 'dateformat'
 import Link from 'next/link'
 import ScrollToTop from 'react-scroll-to-top'
 import Aos from 'aos'
 import "aos/dist/aos.css"
-import { useEffect } from "react";
+import { useEffect } from "react"
+import useWindowDimensions from "../hooks/useWindowsDimensions"
 
 export default function Home({data}) {
+
+  if (typeof window !== 'undefined') {
+    // detect window screen width function
+      const { height, width } = useWindowDimensions();
+      console.log(height, width)
+  }
+
   useEffect(() => {
     Aos.init({
-      duration: 300,
-      offset: -60
+      duration: 350,
+      offset: 10,
+      disable: 'mobile'
     })
   }, [])
 
@@ -40,7 +49,7 @@ export default function Home({data}) {
         </li>
               {data.map((coin, index) => {
                 return (
-                    <li className="table-row" key={coin.id} data-aos="fade-up">
+                    <li className="table-row" key={coin.id} data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}>
                         <div className="col col-1" data-label="Index">{index+1}</div>
                         <div className="col col-2" data-label="Crypto Name">       
                           <Link href={`coin/${coin.id}`}>
@@ -80,7 +89,7 @@ export default function Home({data}) {
       </main> 
 
       <footer>
-        <p>Made by Rens Gerritsen || <a>https://github.com/RensG2005/cryptoWatch</a></p>
+        <p>Made by Rens Gerritsen || <a href="https://github.com/RensG2005/cryptoWatch">Github</a></p>
       </footer>
     </div>
   )
@@ -88,16 +97,17 @@ export default function Home({data}) {
 
 export async function getServerSideProps(context) {
   try {
-  let data = await CoinGeckoClient.coins.all({
-    localization: false,
-    per_page: 100
-  });
-    return {
-      props: {
-        data: data.data
+    let data = await CoinGeckoClient.coins.all({
+      localization: false,
+      per_page: 150,
+    });
+      return {
+        props: {
+          data: data.data
+        }
       }
-    }
   } catch (err) {
+    console.log(err)
     return {
       redirect: {
         destination: '/404',
