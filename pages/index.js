@@ -21,7 +21,7 @@ export default function Home({data}) {
 
   useEffect(() => {
     Aos.init({
-      duration: 350,
+      duration: 200,
       offset: 10,
       disable: 'mobile'
     })
@@ -49,7 +49,7 @@ export default function Home({data}) {
         </li>
               {data.map((coin, index) => {
                 return (
-                    <li className="table-row" key={coin.id} data-aos={index % 2 === 0 ? "fade-left" : "fade-right"}>
+                    <li className="table-row" key={coin.id} data-aos="fade-up">
                         <div className="col col-1" data-label="Index">{index+1}</div>
                         <div className="col col-2" data-label="Crypto Name">       
                           <Link href={`coin/${coin.id}`}>
