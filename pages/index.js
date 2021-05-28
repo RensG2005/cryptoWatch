@@ -41,7 +41,7 @@ export default function Home({data}) {
         </li>
               {data.map((coin, index) => {
                 return (
-                    <li className="table-row" key={coin.id} data-aos="fade-up">
+                    <li className="table-row" key={coin.id} >
                         <div className="col col-1" data-label="Index">{index+1}</div>
                         <div className="col col-2" data-label="Crypto Name">       
                           <Link href={`coin/${coin.id}`}>
