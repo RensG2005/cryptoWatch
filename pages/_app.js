@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <header>
           <Link href="/">
-            <h1 className="logo">CryptoWatch</h1>
+            <h1 className="logo"><a>CryptoWatch</a></h1>
           </Link>
         <nav>
           <Link href="/exchanges">
