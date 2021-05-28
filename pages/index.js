@@ -99,7 +99,7 @@ export async function getServerSideProps(context) {
   try {
     let data = await CoinGeckoClient.coins.all({
       localization: false,
-      per_page: 150,
+      per_page: 100,
     });
       return {
         props: {
