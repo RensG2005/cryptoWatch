@@ -1,0 +1,30 @@
+.fourpage {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fourpage .content {
+    text-align: center;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+}
+
+.fourpage .content h2 {
+    margin: 1rem 0 ;
+}
+
+.fourpage a {
+    margin-top: .4rem;
+    background-color: #3861fb;
+    padding: 1rem .5rem;
+    color: white;
+    display: inline-block;
+}
+.fourpage a:hover {
+    background-color: #3d69ff;
+    color: white;
+    border: none;
+}

@@ -18,9 +18,9 @@ Router.onRouteChangeError = () => NProgress.done()
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
 		AOS.init({
-			delay: 300,
-			duration: 200,
-      offset: 10,
+			delay: 90,
+			duration: 400,
+      offset: 30,
 		});
 	});
   return (
