@@ -1,35 +1,73 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import CoinGecko from 'coingecko-api'
+import { Fragment, useEffect, useState } from "react";
 const CoinGeckoClient = new CoinGecko()
+import Link from 'next/link'
+import Image from 'next/image'
 import millify from "millify";
 import dateFormat from 'dateformat'
-import Link from 'next/link'
-import ScrollToTop from 'react-scroll-to-top'
-import { Fragment } from "react";
+import Head from "next/head";
 
+export default function watchlist() {
 
-export default function Home({data}) { 
+    const [data, setData] = useState([])
+    const [noData, setNoData] = useState(false)
+    const [arr, setArr] = useState(false)
 
-  function favorite({id}) {
-    //adds clicked coin to favorites array in localstorage
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || []
-    favorites.includes(id) ? 0 : favorites.push(id)
-    localStorage.setItem("favorites", JSON.stringify(favorites))
-  }
-  return (
-    <div>
-      <Head>
-        <title>CryptoWatch | Home</title>
-        <meta name="description" content="A crypto tracker app to watch all the prices of the crypto markets" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
-              integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"></link>
-      </Head>
-      <main>
-      <ScrollToTop smooth />
+    let getData;
+
+    if (typeof window !== 'undefined') {
+        let tickers = JSON.parse(localStorage.getItem("favorites")) || []
+
+        getData = async () => {
+            if(tickers.length > 0) {
+                let favoritesData = []
+                for(let i = 0; i<tickers.length; i++) {
+                    let coinData = await CoinGeckoClient.coins.fetch(tickers[i], {
+                        localization: false
+                    })
+                    favoritesData.push(coinData.data)
+                }
+                setData(favoritesData)
+            } else {
+                setNoData(true)
+            }
+        }
+        
+        useEffect(async () => {
+            await getData()
+            setArr()
+        }, [localStorage.getItem("favorites")])
+        
+    }
+    
+    const deleteFavorite = ({id}) => {
+        let favos = JSON.parse(localStorage.getItem('favorites')) || []
+
+        if(favos.length > 0) {
+            let filtered = favos.filter(value => {
+                console.log(value, id)
+                return value !== id
+            })
+            localStorage.setItem("favorites", JSON.stringify(filtered))
+            getData()
+        } else {
+            setData(true)
+        }
+    }
+    
+
+    return (
+        <div>
+        <Head>
+            <title>CryptoWatch | Favorites</title>
+            <meta name="description" content="A crypto tracker app to watch all the prices of the crypto markets" />
+            <link rel="icon" href="/favicon.ico" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+                integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"></link>
+        </Head>
+        <main>
         <ul className="responsive-table"> 
-          <li className="table-header">
+            {data.length > 0 && <li className="table-header">
             <div className="col col-0"></div>
             <div className="col col-1">#
               <button className="sortBtn">
@@ -71,12 +109,13 @@ export default function Home({data}) {
               <i className="fas fa-sort"></i>
               </button> 
             </div>
-        </li>
-              {data.map((coin, index) => {
+        </li>}
+ 
+              {data.length > 0 ? data.map((coin, index) => {
                 return (
                   <Fragment key={coin.id}>
                     <li className="table-row"  data-aos="fade-up">
-                        <div className="col col-0" onClick={() => favorite({id: coin.id})}><i className="far fa-star"></i></div>
+                        <div className="col col-0" onClick={() => deleteFavorite({id: coin.id})}><i className="fas fa-star"></i></div>
                         <div className="col col-1" data-label="Index">{index+1}</div>
                         <div className="col col-2" data-label="Crypto Name">       
                           <Link href={`coin/${coin.id}`}>
@@ -112,34 +151,12 @@ export default function Home({data}) {
                 </li>
                 </Fragment>
           )}
-          )} 
+          ) : !noData ? <div className="loader"><div className="lds-ripple"><div></div><div></div></div></div> : <div className="loader"><h3>No favorites yet</h3></div>} 
           </ul>
-      </main> 
-
-      <footer>
-        <p>Made by Rens Gerritsen || <a href="https://github.com/RensG2005/cryptoWatch">Github</a> || I would appreciate it if you would give it a star</p>
-      </footer>
-    </div>
-  )
-}
-
-export async function getServerSideProps(context) {
-  try {
-    let data = await CoinGeckoClient.coins.all({
-      localization: false,
-      per_page: 100,
-    });
-      return { 
-        props: {
-          data: data.data
-        }
-      }
-  } catch (err) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
-    }
-  }
+          </main>
+          <footer>
+            <p>Made by Rens Gerritsen || <a href="https://github.com/RensG2005/cryptoWatch">Github</a> || I would appreciate it if you would give it a star</p>
+          </footer>
+        </div>
+    )
 }
