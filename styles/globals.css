@@ -92,3 +92,17 @@ a:hover {
   border-bottom: 2px solid black;
 }
 
+
+
+i {
+  cursor: pointer;
+}
+
+.sortBtn {
+  background: transparent;
+  border: 0;
+}
+
+.sortBtn:focus {
+  outline: none;
+}
