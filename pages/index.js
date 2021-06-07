@@ -12,14 +12,7 @@ import { Fragment, useState, useEffect } from "react";
 export default function Home({data}) { 
   
 
-  const [currentSort0, setCurrentSort0] = useState("default")
-  const [currentSort1, setCurrentSort1] = useState("default")
-  const [currentSort2, setCurrentSort2] = useState("default")
-  const [currentSort3, setCurrentSort3] = useState("default")
-  const [currentSort4, setCurrentSort4] = useState("default")
-  const [currentSort5, setCurrentSort5] = useState("default")
-  const [currentSort6, setCurrentSort6] = useState("default")
-  const [currentSort7, setCurrentSort7] = useState("default")
+  const [currentSort, setCurrentSort] = useState("default")
 
   const onSortChange = (number) => {
     if (window["currentSort" + number] === 'down') window["setCurrentSort" + number]('up')
@@ -55,52 +48,53 @@ export default function Home({data}) {
       <ScrollToTop smooth />
         <ul className="responsive-table"> 
           <li className="table-header">
+            <div className="col col-0"></div>
             <div className="col col-1">#
-              <button onClick={onSortChange(0)} className="sortBtn">
-                <i className={`fas fa-${sortTypes[currentSort0].class}`}></i>
+              <button className="sortBtn">
+                <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
               </button> 
             </div>
             <div className="col col-2">Name
-            <button onClick={onSortChange(1)} className="sortBtn">
-              <i className={`fas fa-${sortTypes[currentSort1].class}`}></i>
+            <button className="sortBtn">
+              <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
               </button> 
             </div>
             <div className="col col-3">Price 
-            <button onClick={onSortChange(2)} className="sortBtn">
-              <i className={`fas fa-${sortTypes[currentSort2].class}`}></i>
+            <button className="sortBtn">
+              <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
               </button> 
             </div>
             <div className="col col-4">(24h)% 
-            <button onClick={onSortChange(3)} className="sortBtn">
-            <i className={`fas fa-${sortTypes[currentSort3].class}`}></i>
+            <button className="sortBtn">
+            <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
             </button> 
             </div>
             <div className="col col-5">(7d) %
-            <button onClick={onSortChange(4)} className="sortBtn">
-             <i className={`fas fa-${sortTypes[currentSort4].class}`}></i>
+            <button className="sortBtn">
+             <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
              </button> 
              </div>
             <div className="col col-6">Market Cap 
-            <button onClick={onSortChange(5)} className="sortBtn">
-              <i className={`fas fa-${sortTypes[currentSort5].class}`}></i>
+            <button className="sortBtn">
+              <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
               </button> 
             </div>
             <div className="col col-7">Volume 
-            <button onClick={onSortChange(6)} className="sortBtn">
-              <i className={`fas fa-${sortTypes[currentSort6].class}`}></i>
+            <button className="sortBtn">
+              <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
               </button> 
             </div>
             <div className="col col-7">Last updated 
-              <button onClick={onSortChange(7)} className="sortBtn">
-              <i className={`fas fa-${sortTypes[currentSort7].class}`}></i>
+              <button className="sortBtn">
+              <i className={`fas fa-${sortTypes[currentSort].class}`}></i>
               </button> 
             </div>
         </li>
-              {[...data].sort(sortTypes[currentSort0].fn).map((coin, index) => {
+              {[...data].sort(sortTypes[currentSort].fn).map((coin, index) => {
                 return (
                   <Fragment key={coin.id}>
-                    <div>Favorite</div>
                     <li className="table-row"  data-aos="fade-up">
+                        <div className="col col-0"><i className="far fa-star"></i></div>
                         <div className="col col-1" data-label="Index">{index+1}</div>
                         <div className="col col-2" data-label="Crypto Name">       
                           <Link href={`coin/${coin.id}`}>
@@ -148,6 +142,7 @@ export default function Home({data}) {
 }
 
 export async function getServerSideProps(context) {
+  console.log("hello")
   try {
     let data = await CoinGeckoClient.coins.all({
       localization: false,

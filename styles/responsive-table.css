@@ -1,8 +1,6 @@
 .responsive-table {
 margin: 0 auto;
 }
-
-
 .responsive-table li {
 border-radius: 3px;
 padding: 15px 25px;
@@ -26,11 +24,14 @@ border-bottom: 1px solid #eff2f5;
     background-color: #ffffff;
     box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
+.responsive-table .col-0 {
+    flex-basis: 3%;
+}
 .responsive-table .col-1 {
-flex-basis: 3%;
+    flex-basis: 3%;
 }
 .responsive-table .col-2 {
-flex-basis: 15%;
+flex-basis: 20%;
 }
 .responsive-table .col-3 {
 flex-basis: 15%;
@@ -45,7 +46,7 @@ flex-basis: 15%;
 flex-basis: 15%;
 }
 .responsive-table .col-7 {
-flex-basis: 16%;
+flex-basis: 15%;
 }
 .responsive-table .col-8 {
 flex-basis: 16%;
