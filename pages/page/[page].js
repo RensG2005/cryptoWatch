@@ -5,7 +5,7 @@ import ScrollToTop from "react-scroll-to-top";
 const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
 
-function coin({data}) {
+function coin({data, page}) {
 
     let [arr, setArr] = useState([]);
   
@@ -18,9 +18,13 @@ function coin({data}) {
     
     return (
         <div>
-            <Head>
-            <title>Bitcoin Price Today</title>
-            </Head>
+      <Head>
+        <title>CryptoWatch | Page: {page}</title>
+        <meta name="description" content="A crypto tracker app to watch all the prices of the crypto markets" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
+              integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
+      </Head>
 
             <main>
       <ScrollToTop smooth />
@@ -43,7 +47,7 @@ function coin({data}) {
         </li>
               {data.map((coin, index) => {
                 return (
-                  <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} />
+                  <TableRowHomepage coin={coin} index={index + 100 * (page - 1)} arr={arr} setArr={setArr} key={coin.id} />
                 )}
           )} 
           </ul>
@@ -66,7 +70,8 @@ export async function getServerSideProps(context) {
           });
       return {
         props: {
-          data: data.data
+          data: data.data,
+          page: page
         }
       }
     } catch (err) {

@@ -29,6 +29,7 @@ border-bottom: 1px solid #eff2f5;
 }
 .responsive-table .col-1 {
     flex-basis: 3%;
+    margin-right: 5px;
 }
 .responsive-table .col-2 {
 flex-basis: 20%;

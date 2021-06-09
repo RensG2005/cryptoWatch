@@ -46,7 +46,7 @@ export default function Home({data}) {
         </li>
               {data.map((coin, index) => {
                 return (
-                  <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} />
+                  <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />
                 )}
           )} 
           </ul>
@@ -56,6 +56,7 @@ export default function Home({data}) {
                   <Link href="/page/3">3</Link>
                   <Link href="/page/4">4</Link>
                   <Link href="/page/5">5</Link>
+                  <p>...</p>
                   <Link href="/page/77">77</Link>
           </section>
       </main> 
@@ -78,7 +79,8 @@ export async function getServerSideProps(context) {
 
       return { 
         props: {
-          data: data.data
+          data: data.data,
+          page: 1
         }
       }
   } catch (err) {

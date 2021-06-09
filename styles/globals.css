@@ -77,6 +77,10 @@ header nav a {
   padding: 1px;
 }
 
+.fas.fa-star {
+  color: var(--primary-color);
+}
+
 a:hover {
   border-bottom: 2px solid black;
 }
@@ -87,6 +91,10 @@ a:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.coinlink h5 {
+  margin: 4px;
 }
 
 .coinlink h5:hover {

@@ -34,7 +34,7 @@ function TableRowHomepage({coin, index, arr, setArr}) {
                 <div className="col col-2" data-label="Crypto Name">       
                     <Link href={`coin/${coin.id}`}>
                     <div className="coinlink" >
-                        <Image src={coin?.image?.thumb} width={30} height={30} alt={coin?.id} />
+                        <Image src={coin?.image?.thumb} width={20} height={20} alt={coin?.id} objectFit="fill" />
                         <h5>{coin?.name}<span>{coin?.symbol.toUpperCase()}</span></h5>
                     </div>
                     </Link>
