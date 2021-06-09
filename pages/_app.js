@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }) {
           </Link>
         </nav>
       </header>
-      <Component {...pageProps} />
+        <Component {...pageProps} />
     </>
   ) 
 }

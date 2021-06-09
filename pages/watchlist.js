@@ -16,7 +16,7 @@ export default function watchlist() {
     let getData;
 
     if (typeof window !== 'undefined') {
-        let tickers = JSON.parse(localStorage.getItem("favorites")) || []
+        let tickers = JSON.parse(localStorage.getItem("watchlist")) || []
 
         getData = async () => {
             if(tickers.length > 0) {
@@ -35,20 +35,19 @@ export default function watchlist() {
         
         useEffect(async () => {
             await getData()
-            setArr()
-        }, [localStorage.getItem("favorites")])
+        }, [localStorage.getItem("watchlist")])
         
     }
     
     const deleteFavorite = ({id}) => {
-        let favos = JSON.parse(localStorage.getItem('favorites')) || []
+        let favos = JSON.parse(localStorage.getItem('watchlist')) || []
 
         if(favos.length > 0) {
             let filtered = favos.filter(value => {
                 console.log(value, id)
                 return value !== id
             })
-            localStorage.setItem("favorites", JSON.stringify(filtered))
+            localStorage.setItem("watchlist", JSON.stringify(filtered))
             getData()
         } else {
             setData(true)
@@ -63,7 +62,7 @@ export default function watchlist() {
             <meta name="description" content="A crypto tracker app to watch all the prices of the crypto markets" />
             <link rel="icon" href="/favicon.ico" />
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
-                integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"></link>
+                integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
         </Head>
         <main>
         <ul className="responsive-table"> 
@@ -121,27 +120,27 @@ export default function watchlist() {
                           <Link href={`coin/${coin.id}`}>
                             <div className="coinlink" >
                               <Image src={coin.image.thumb} width={30} height={30} alt={coin.id} />
-                              <h5>{coin.name}<span>{coin.symbol.toUpperCase()}</span></h5>
+                              <h5>{coin?.name}<span>{coin?.symbol.toUpperCase()}</span></h5>
                             </div>
                           </Link> 
                         </div>
                   <div className="col col-3" data-label="Price: ">
-                    ${coin.market_data.current_price.usd}
+                    ${coin?.market_data.current_price?.usd}
                   </div>
                   <div className={coin.market_data.price_change_percentage_24h >= 0 ? "col col-4 green" : "col col-4 red"} data-label="24h %: ">
-                    {coin.market_data.price_change_percentage_24h.toFixed(2)}%
+                    {coin?.market_data.price_change_percentage_24h?.toFixed(2)}%
                   </div>
 
                 <div className={coin.market_data.price_change_percentage_7d >= 0 ? "col col-5 green" : "col col-5 red"} data-label="Payment Status">
-                    {coin.market_data.price_change_percentage_7d.toFixed(2)}%
+                    {coin?.market_data.price_change_percentage_7d?.toFixed(2)}%
                 </div>
                 <div className="col col-6" data-label="Market Cap">
-                    ${millify(coin.market_data.market_cap.usd, {
+                    ${millify(coin?.market_data.market_cap?.usd, {
                       precision: 3
                     })}
                 </div>
                 <div className="col col-7" data-label="Total Volume">
-                  {millify(coin.market_data.total_volume.usd, {
+                  {millify(coin?.market_data.total_volume?.usd, {
                     precision: 3
                   })}
                 </div>
