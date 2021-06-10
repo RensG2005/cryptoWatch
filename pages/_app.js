@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
 		AOS.init({
 			delay: 90,
 			duration: 400,
-      offset: 30,
+      offset: 10,
 		});
 	});
   return (
@@ -36,8 +36,8 @@ function MyApp({ Component, pageProps }) {
           <Link href="/watchlist">
             Watchlist
           </Link>
-          <Link href="/blog">
-            Blog
+          <Link href="/events">
+            Events
           </Link>
         </nav>
       </header>

@@ -64,7 +64,9 @@ export default function Home({data}) {
       </main> 
 
       <footer>
-        <p>Made by Rens Gerritsen || <a href="https://github.com/RensG2005/cryptoWatch">Github</a> || I would appreciate it if you would give it a star</p>
+        <p>Made by Rens Gerritsen</p>
+          <a target="_blank" href="https://github.com/RensG2005/cryptoWatch">Github</a>
+          <p>I would appreciate it if you would give it a star</p>
       </footer>
     </div>
   )

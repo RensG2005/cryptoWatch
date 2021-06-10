@@ -2,12 +2,12 @@
 margin: 0 auto;
 }
 .responsive-table li {
-border-radius: 3px;
-padding: 15px 25px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 25px;
+    border-radius: 3px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 .responsive-table .table-header {
 background-color: white;
