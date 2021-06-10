@@ -51,7 +51,9 @@ export default function Home({data}) {
           )} 
           </ul>
           <section className="pagesCount">
-                  <Link href="/page/1">1</Link>
+                  <Link href="#">
+                    <a className="active">1</a>
+                  </Link>
                   <Link href="/page/2">2</Link>
                   <Link href="/page/3">3</Link>
                   <Link href="/page/4">4</Link>

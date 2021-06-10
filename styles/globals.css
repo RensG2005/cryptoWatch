@@ -101,6 +101,11 @@ a:hover {
   border-bottom: 2px solid black;
 }
 
+.pagesCount a.active {
+  border-bottom: 2px solid black;
+  color: var(--primary-color);
+}
+
 
 
 i {

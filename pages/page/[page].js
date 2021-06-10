@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect  } from 'react';
 import Head from 'next/head'
-import TableRowHomepage from "../../components/TableRowHomepage";
 import ScrollToTop from "react-scroll-to-top";
 const CoinGecko = require('coingecko-api');
+import Link from 'next/link'
+import TableRowHomepage from "../../components/TableRowHomepage";
 const CoinGeckoClient = new CoinGecko();
+
 
 function coin({data, page}) {
 
@@ -45,12 +47,48 @@ function coin({data, page}) {
             <div className="col col-7">Last updated </div>
             
         </li>
-              {data.map((coin, index) => {
-                return (
-                  <TableRowHomepage coin={coin} index={index + 100 * (page - 1)} arr={arr} setArr={setArr} key={coin.id} />
-                )}
-          )} 
+                {data.map((coin, index) => {
+                    return (
+                    <TableRowHomepage coin={coin} index={index + 100 * (page - 1)} arr={arr} setArr={setArr} key={coin.id} />
+
+                    )}
+            )} 
           </ul>
+          <section className="pagesCount">
+              {page === 1 ? "" : page  === 2 ? (<>
+                  <Link href={`/page/${page - 1}`}>
+                    <a>{page - 1}</a>
+                  </Link></>) : (<>
+                  <Link href="/page/1">1</Link>
+                  <p>...</p>
+                  <Link href={`/page/${page - 2}`}>
+                    <a>{page - 2}</a>
+                  </Link>
+                  <Link href={`/page/${page - 1}`}>
+                    <a>{page - 1}</a>
+                  </Link>
+                  </>)}
+                  
+                  <Link href={`/page/${page}`}>
+                    <a className="active">{page}</a>
+                  </Link>
+                  
+                  {page === 77 ? "" : page === 76 ? (<>
+                  <Link href={`/page/${page + 1}`}>
+                    <a>{page + 1}</a>
+                  </Link>
+                  </>)
+                    :  (<><Link href={`/page/${page + 1}`}>
+                    <a>{page + 1}</a>
+                  </Link>
+                  <Link href={`/page/${page + 2}`}>
+                    <a>{page + 2}</a>
+                  </Link>
+                  <p>...</p>
+                  <Link href="/page/77">77</Link>
+                  </>)
+                  }
+          </section>
       </main> 
 
       <footer>
@@ -63,6 +101,14 @@ function coin({data, page}) {
 export async function getServerSideProps(context) {
     try {
         const {page} = context.query
+        if(page > 77 || page < 1) {
+            return {
+                redirect: {
+                  destination: '/404',
+                  permanent: false,
+                },
+              }
+        }
         let data = await CoinGeckoClient.coins.all({
             localization: false,
             per_page: 100,
@@ -71,7 +117,7 @@ export async function getServerSideProps(context) {
       return {
         props: {
           data: data.data,
-          page: page
+          page: +page
         }
       }
     } catch (err) {
