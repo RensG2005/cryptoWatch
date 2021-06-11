@@ -21,18 +21,19 @@ function coin({data, page, reversedData}) {
   }, [])
 
     useEffect(() => {
-      console.log(data, reversedData)
-      if(reverse) {
-        setFilteredCoins(reversedData)
-      }
+      if(reverse) setFilteredCoins(reversedData)
+      else setFilteredCoins(data)
     }, [reverse])
   
     useEffect(() => {
       let timeoutId = setTimeout(() => {
         const regexp = new RegExp(filter, 'gi');
+        console.log(reverse)
         setFilteredCoins(data.filter((coin) => {
             return coin.name.match(regexp) || coin.symbol.match(regexp);
         }));
+        console.log(reverse)
+
       }, 500);
       return () => {
         clearTimeout(timeoutId);
@@ -57,7 +58,7 @@ function coin({data, page, reversedData}) {
         </form>
         <ul className="responsive-table"> 
           <li className="table-header">
-            <div className="col col-0"></div>
+        <div className="col col-0"></div>
             <div className="col col-1">#
               <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
                 <i className="fas fa-sort"></i>
@@ -74,8 +75,7 @@ function coin({data, page, reversedData}) {
         </li>
                 {filteredCoins.map((coin, index) => {
                     return (
-                    <TableRowHomepage coin={coin} index={index + 100 * (page - 1)} arr={arr} setArr={setArr} key={coin.id} />
-
+                      <TableRowHomepage coin={coin} index={index + 100 * (page - 1)} arr={arr} setArr={setArr} key={coin.id} />
                     )}
             )} 
           </ul>

@@ -1,10 +1,23 @@
 import CoinGecko from 'coingecko-api'
 const CoinGeckoClient = new CoinGecko()
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import ScrollToTop from "react-scroll-to-top";
 import ExchangeRow from "../components/ExchangeRow";
 
-export default function Exchange({data}) {
+export default function Exchange({data, reversed}) {
+
+  const [reverse, setReverse] = useState(false)
+  const [filteredData, setFilterdData] = useState([])
+
+  useEffect(() => {
+    if(reverse) {
+      setFilterdData(reversed)
+      return 0
+    }
+    setFilterdData(data)
+  }, [reverse])
+
 
     return (
         <div>
@@ -20,7 +33,7 @@ export default function Exchange({data}) {
         <ul className="responsive-table"> 
           <li className="table-header">
             <div className="col col-1">#
-              <button className="sortBtn">
+              <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
                 <i className="fas fa-sort"></i>
               </button> 
             </div>
@@ -33,7 +46,7 @@ export default function Exchange({data}) {
             <div className="col col-7">Last updated </div>
             
         </li>
-              {data.map((exchange, index) => {
+              {filteredData.map((exchange, index) => {
                 return (
                   <ExchangeRow exchange={exchange} index={index} />
                 )}
@@ -50,9 +63,11 @@ export default function Exchange({data}) {
 export async function getServerSideProps() {
     try {
       let data = await CoinGeckoClient.exchanges.all();
+      let reversed = data.data.slice().reverse()
         return { 
           props: {
             data: data.data,
+            reversed: reversed
           }
         }
     } catch (err) {
