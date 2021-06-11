@@ -12,18 +12,17 @@ export default function Home({data, reversedData}) {
   const [filter, setFilter] = useState('');
   const [filteredCoins, setFilteredCoins] = useState([]);
   const [reverse, setReverse] = useState(false);
-
+  
   useEffect(() => {
-    if(reverse) {
-      setFilteredCoins(reversedData)
-    }
+    if(reverse) setFilteredCoins(reversedData)
+    else setFilteredCoins(data)
   }, [reverse])
 
   useEffect(() => {
     let timeoutId = setTimeout(() => {
       const regexp = new RegExp(filter, 'gi');
       setFilteredCoins(data.filter((coin) => {
-          return coin.name.match(regexp);
+        return coin.name.match(regexp) || coin.symbol.match(regexp);
       }));
     }, 500);
     return () => {
@@ -35,6 +34,7 @@ export default function Home({data, reversedData}) {
     if (typeof window !== 'undefined') {
       setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
     }
+
   }, [])
      
   return (
@@ -68,7 +68,9 @@ export default function Home({data, reversedData}) {
             <div className="col col-7">Last updated </div>
             
         </li>
-              {filteredCoins.map((coin, index) => <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />)}
+              {filteredCoins.map((coin, index) => {
+                return <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />
+              })}
           </ul>
           <section className="pagesCount">
                   <Link href="#">
@@ -100,11 +102,11 @@ export async function getServerSideProps(context) {
       page: 1
     });
 
-
+    let reversed =  data.data.slice().reverse();
       return { 
         props: {
           data: data.data,
-          reversedData: data.data.reverse()
+          reversedData: reversed
         }
       }
   } catch (err) {

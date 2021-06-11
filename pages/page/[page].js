@@ -7,20 +7,21 @@ import TableRowHomepage from "../../components/TableRowHomepage";
 const CoinGeckoClient = new CoinGecko();
 
 
-function coin({data, page}) {
+function coin({data, page, reversedData}) {
 
-  const reversedData = data.reverse()
   const [arr, setArr] = useState([]);
   const [filter, setFilter] = useState('');
   const [filteredCoins, setFilteredCoins] = useState([]);
   const [reverse, setReverse] = useState(false);
   
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
+    }
+  }, [])
+  
     useEffect(() => {
-      if (typeof window !== 'undefined') {
-        setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
-      }
-    }, [])
-    useEffect(() => {
+      console.log(data, reversedData)
       if(reverse) {
         setFilteredCoins(reversedData)
       }
@@ -30,7 +31,6 @@ function coin({data, page}) {
       let timeoutId = setTimeout(() => {
         const regexp = new RegExp(filter, 'gi');
         setFilteredCoins(data.filter((coin) => {
-          console.log(coin)
             return coin.name.match(regexp) || coin.symbol.match(regexp);
         }));
       }, 500);
@@ -139,10 +139,14 @@ export async function getServerSideProps(context) {
             per_page: 100,
             page: page
           });
+          data.data.map(coin => console.log(coin.name))
+          console.log("_______________________________________________")
+          data.data.reverse().map(coin => console.log(coin.name))
       return {
         props: {
           data: data.data,
-          page: +page
+          page: +page,
+          reversedData: data.data.reverse()
         }
       }
     } catch (err) {
