@@ -19,7 +19,7 @@ function coin({data, page, reversedData}) {
       setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
     }
   }, [])
-  
+
     useEffect(() => {
       console.log(data, reversedData)
       if(reverse) {
@@ -139,14 +139,13 @@ export async function getServerSideProps(context) {
             per_page: 100,
             page: page
           });
-          data.data.map(coin => console.log(coin.name))
-          console.log("_______________________________________________")
-          data.data.reverse().map(coin => console.log(coin.name))
+
+        let reversed = data.data.slice().reverse()
       return {
         props: {
           data: data.data,
           page: +page,
-          reversedData: data.data.reverse()
+          reversedData: reversed
         }
       }
     } catch (err) {
