@@ -4,9 +4,7 @@ import Head from "next/head";
 import ScrollToTop from "react-scroll-to-top";
 import ExchangeRow from "../components/ExchangeRow";
 
-export default function watchlist({data}) {
-
-    console.log(data)
+export default function Exchange({data}) {
 
     return (
         <div>

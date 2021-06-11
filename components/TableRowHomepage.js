@@ -12,12 +12,8 @@ function TableRowHomepage({coin, index, arr, setArr}) {
     //adds or removes clicked coin to favorites array in localstorage
     let favorites = JSON.parse(localStorage.getItem("watchlist")) || []
 
-    console.log(favorites, arr)
-
     favorites.includes(id) ? favorites = favorites.filter(coinId => coinId !== id)  : favorites.push(id)
-    console.log(favorites, arr)
     await setArr(favorites)
-    console.log(favorites, arr)
 
     localStorage.setItem("watchlist", JSON.stringify(favorites))
   }

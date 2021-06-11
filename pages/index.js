@@ -7,9 +7,30 @@ import TableRowHomepage from "../components/TableRowHomepage";
 import Link from "next/link";
 
 
-export default function Home({data}) { 
-  let [arr, setArr] = useState([]);
-  
+export default function Home({data, reversedData}) {
+  const [arr, setArr] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [filteredCoins, setFilteredCoins] = useState([]);
+  const [reverse, setReverse] = useState(false);
+
+  useEffect(() => {
+    if(reverse) {
+      setFilteredCoins(reversedData)
+    }
+  }, [reverse])
+
+  useEffect(() => {
+    let timeoutId = setTimeout(() => {
+      const regexp = new RegExp(filter, 'gi');
+      setFilteredCoins(data.filter((coin) => {
+          return coin.name.match(regexp);
+      }));
+    }, 500);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [filter]);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
@@ -27,11 +48,14 @@ export default function Home({data}) {
       </Head>
       <main>
       <ScrollToTop smooth />
+      <form className="filterForm" onSubmit={(e)=> e.preventDefault()}>
+            <input type="text" className="filterInput" placeholder="Filter: e.g. Bitcoin" onChange={(e) => setFilter(e.target.value)} />
+        </form>
         <ul className="responsive-table"> 
           <li className="table-header">
             <div className="col col-0"></div>
             <div className="col col-1">#
-              <button className="sortBtn">
+              <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
                 <i className="fas fa-sort"></i>
               </button> 
             </div>
@@ -44,11 +68,7 @@ export default function Home({data}) {
             <div className="col col-7">Last updated </div>
             
         </li>
-              {data.map((coin, index) => {
-                return (
-                  <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />
-                )}
-          )} 
+              {filteredCoins.map((coin, index) => <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />)}
           </ul>
           <section className="pagesCount">
                   <Link href="#">
@@ -84,7 +104,7 @@ export async function getServerSideProps(context) {
       return { 
         props: {
           data: data.data,
-          page: 1
+          reversedData: data.data.reverse()
         }
       }
   } catch (err) {

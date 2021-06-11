@@ -114,6 +114,45 @@ a:hover {
 }
 
 
+.searchResult {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.searchResult h1 {
+  background-color: black;
+}
+
+.filterForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.filterInput {
+  	font-size: 1rem;
+    padding: 0 .2rem;
+    width: 320px;
+    border: 1px solid var(--primary-color);
+}
+
+.filterInput:focus {
+  outline: none;
+}
+
+
 
 i {
   cursor: pointer;

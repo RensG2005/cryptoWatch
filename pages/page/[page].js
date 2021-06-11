@@ -9,13 +9,35 @@ const CoinGeckoClient = new CoinGecko();
 
 function coin({data, page}) {
 
-    let [arr, setArr] = useState([]);
+  const reversedData = data.reverse()
+  const [arr, setArr] = useState([]);
+  const [filter, setFilter] = useState('');
+  const [filteredCoins, setFilteredCoins] = useState([]);
+  const [reverse, setReverse] = useState(false);
   
     useEffect(() => {
       if (typeof window !== 'undefined') {
         setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
       }
     }, [])
+    useEffect(() => {
+      if(reverse) {
+        setFilteredCoins(reversedData)
+      }
+    }, [reverse])
+  
+    useEffect(() => {
+      let timeoutId = setTimeout(() => {
+        const regexp = new RegExp(filter, 'gi');
+        setFilteredCoins(data.filter((coin) => {
+          console.log(coin)
+            return coin.name.match(regexp) || coin.symbol.match(regexp);
+        }));
+      }, 500);
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }, [filter]);
 
     
     return (
@@ -30,11 +52,14 @@ function coin({data, page}) {
 
             <main>
       <ScrollToTop smooth />
+      <form className="filterForm" onSubmit={(e)=> e.preventDefault()}>
+            <input type="text" className="filterInput" placeholder="Filter: e.g. Bitcoin" onChange={(e) => setFilter(e.target.value)} />
+        </form>
         <ul className="responsive-table"> 
           <li className="table-header">
             <div className="col col-0"></div>
             <div className="col col-1">#
-              <button className="sortBtn">
+              <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
                 <i className="fas fa-sort"></i>
               </button> 
             </div>
@@ -47,7 +72,7 @@ function coin({data, page}) {
             <div className="col col-7">Last updated </div>
             
         </li>
-                {data.map((coin, index) => {
+                {filteredCoins.map((coin, index) => {
                     return (
                     <TableRowHomepage coin={coin} index={index + 100 * (page - 1)} arr={arr} setArr={setArr} key={coin.id} />
 
