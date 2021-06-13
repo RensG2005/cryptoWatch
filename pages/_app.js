@@ -15,6 +15,9 @@ Router.onRouteChangeError = () => NProgress.done()
 
 
 function MyApp({ Component, pageProps }) {
+  
+  document.documentElement.lang = 'en-us'
+
   useEffect(() => {
 		AOS.init({
 			delay: 90,
