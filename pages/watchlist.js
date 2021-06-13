@@ -74,39 +74,19 @@ export default function watchlist() {
               </button> 
             </div>
             <div className="col col-2">Name
-            <button className="sortBtn">
-              <i className="fas fa-sort"></i>
-              </button> 
             </div>
             <div className="col col-3">Price 
-            <button className="sortBtn">
-              <i className="fas fa-sort"></i>
-              </button> 
             </div>
             <div className="col col-4">(24h)% 
-            <button className="sortBtn">
-            <i className="fas fa-sort"></i>
-            </button> 
             </div>
             <div className="col col-5">(7d) %
-            <button className="sortBtn">
-             <i className="fas fa-sort"></i>
-             </button> 
              </div>
             <div className="col col-6">Market Cap 
-            <button className="sortBtn">
-              <i className="fas fa-sort"></i>
-              </button> 
             </div>
             <div className="col col-7">Volume 
-            <button className="sortBtn">
-              <i className="fas fa-sort"></i>
-              </button> 
             </div>
             <div className="col col-7">Last updated 
-              <button className="sortBtn">
-              <i className="fas fa-sort"></i>
-              </button> 
+
             </div>
         </li>}
  

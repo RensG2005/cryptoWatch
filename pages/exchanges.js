@@ -3,7 +3,8 @@ const CoinGeckoClient = new CoinGecko()
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import ScrollToTop from "react-scroll-to-top";
-import ExchangeRow from "../components/ExchangeRow";
+import ExchangeRow from "../components/tablerows/ExchangeRow";
+import Footer from "../components/Footer";
 
 export default function Exchange({data, reversed}) {
 
@@ -33,7 +34,7 @@ export default function Exchange({data, reversed}) {
         <ul className="responsive-table"> 
           <li className="table-header">
             <div className="col col-1">#
-              <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
+              <button className="sortBtn" onClick={()=>setReverse(!reverse)} name="sortButton">
                 <i className="fas fa-sort"></i>
               </button> 
             </div>
@@ -53,9 +54,7 @@ export default function Exchange({data, reversed}) {
           )} 
           </ul>
         </main>
-        <footer>
-            <p>Made by Rens Gerritsen || <a href="https://github.com/RensG2005/cryptoWatch">Github</a> || I would appreciate it if you would give it a star</p>
-        </footer>
+          <Footer />
     </div>
     )
 }

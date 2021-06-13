@@ -3,8 +3,9 @@ import CoinGecko from 'coingecko-api'
 const CoinGeckoClient = new CoinGecko()
 import ScrollToTop from 'react-scroll-to-top'
 import { useEffect, useState } from "react";
-import TableRowHomepage from "../components/TableRowHomepage";
+import TableRowHomepage from "../components/tablerows/TableRowHomepage";
 import Link from "next/link";
+import Footer from "../components/Footer";
 
 
 export default function Home({data, reversedData}) {
@@ -48,14 +49,11 @@ export default function Home({data, reversedData}) {
       </Head>
       <main>
       <ScrollToTop smooth />
-      <form className="filterForm" onSubmit={(e)=> e.preventDefault()}>
-            <input type="text" className="filterInput" placeholder="Filter: e.g. Bitcoin" onChange={(e) => setFilter(e.target.value)} />
-        </form>
         <ul className="responsive-table"> 
           <li className="table-header">
             <div className="col col-0"></div>
             <div className="col col-1">#
-              <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
+              <button className="sortBtn" onClick={()=>setReverse(!reverse)} name="sortButton">
                 <i className="fas fa-sort"></i>
               </button> 
             </div>
@@ -85,11 +83,7 @@ export default function Home({data, reversedData}) {
           </section>
       </main> 
 
-      <footer>
-        <p>Made by Rens Gerritsen</p>
-          <a target="_blank" href="https://github.com/RensG2005/cryptoWatch">Github</a>
-          <p>I would appreciate it if you would give it a star</p>
-      </footer>
+      <Footer />
     </div>
   )
 }

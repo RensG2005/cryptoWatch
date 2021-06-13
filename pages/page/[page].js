@@ -3,7 +3,8 @@ import Head from 'next/head'
 import ScrollToTop from "react-scroll-to-top";
 const CoinGecko = require('coingecko-api');
 import Link from 'next/link'
-import TableRowHomepage from "../../components/TableRowHomepage";
+import TableRowHomepage from "../../components/tablerows/TableRowHomepage";
+import Footer from "../../components/Footer";
 const CoinGeckoClient = new CoinGecko();
 
 
@@ -60,7 +61,7 @@ function coin({data, page, reversedData}) {
           <li className="table-header">
         <div className="col col-0"></div>
             <div className="col col-1">#
-              <button className="sortBtn" onClick={()=>setReverse(!reverse)}>
+              <button className="sortBtn" onClick={()=>setReverse(!reverse)} name="sortButton">
                 <i className="fas fa-sort"></i>
               </button> 
             </div>
@@ -115,10 +116,7 @@ function coin({data, page, reversedData}) {
                   }
           </section>
       </main> 
-
-      <footer>
-        <p>Made by Rens Gerritsen || <a href="https://github.com/RensG2005/cryptoWatch">Github</a> || I would appreciate it if you would give it a star</p>
-      </footer>
+              <Footer />
         </div>
     )
 }
