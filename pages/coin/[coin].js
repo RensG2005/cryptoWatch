@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import Header from "../../components/Header";
 const CoinGecko = require('coingecko-api');
 const CoinGeckoClient = new CoinGecko();
 
@@ -7,9 +8,9 @@ function coin({data}) {
     return (
         <div>
             <Head>
-            <title>Bitcoin Price Today</title>
+              <title>Bitcoin Price Today</title>
             </Head>
-
+            <Header searchDisabled={true} />
             <main>
                 <header>
                     <h1>{data.name}<span>{data.symbol}</span></h1>  
@@ -22,7 +23,7 @@ function coin({data}) {
                     <ul>
                         {Object.keys(data.community_data).map((key, index) => {
                             if(data.community_data[key]) {
-                                return <li>
+                                return <li key={key}>
                                     {Object.keys(data.community_data)[index]}: { data.community_data[key]}
                                 </li>
                             } else {

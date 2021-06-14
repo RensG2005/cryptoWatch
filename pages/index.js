@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import TableRowHomepage from "../components/tablerows/TableRowHomepage";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 
 export default function Home({data, reversedData}) {
@@ -47,6 +48,9 @@ export default function Home({data, reversedData}) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
               integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
       </Head>
+      
+      <Header setFilter={setFilter} />
+
       <main>
       <ScrollToTop smooth />
         <ul className="responsive-table"> 

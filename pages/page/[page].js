@@ -5,6 +5,7 @@ const CoinGecko = require('coingecko-api');
 import Link from 'next/link'
 import TableRowHomepage from "../../components/tablerows/TableRowHomepage";
 import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 const CoinGeckoClient = new CoinGecko();
 
 
@@ -52,11 +53,10 @@ function coin({data, page, reversedData}) {
               integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
       </Head>
 
+      <Header setFilter={setFilter} />
+
             <main>
       <ScrollToTop smooth />
-      <form className="filterForm" onSubmit={(e)=> e.preventDefault()}>
-            <input type="text" className="filterInput" placeholder="Filter: e.g. Bitcoin" onChange={(e) => setFilter(e.target.value)} />
-        </form>
         <ul className="responsive-table"> 
           <li className="table-header">
         <div className="col col-0"></div>

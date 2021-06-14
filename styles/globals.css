@@ -27,6 +27,11 @@ a {
   box-sizing: border-box;
 }
 
+*, ::before, ::after {
+  box-sizing: border-box;
+  border-spacing: 0px;
+}
+
 main {
   padding: 1rem;
   flex: 1;
@@ -71,6 +76,144 @@ header {
   height: 3rem;
 }
 
+header .mobileNav {
+  display: none;
+  visibility: hidden;
+  z-index: -100;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+  z-index: -100;
+}
+
+@media (max-width: 793px) {
+  header .mobileNav {
+    display: flex;
+    visibility: visible;
+    flex-direction: column;
+    z-index: 1;
+  }
+  header .mobileNav button {
+    position: fixed;
+    top: 0px;
+    right: 10px;
+
+  }
+
+  .shown {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .shown a {
+    margin-bottom: 2rem;
+  }
+
+    header .normalNav {
+      display: none;
+      visibility: hidden;
+      z-index: -100;
+  }
+    header form .filterInputHeader {
+      font-size: 3rem;
+    }
+
+
+
+
+    .menu {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      padding: 0;
+      z-index: 10000000000;
+    }
+    .line {
+      fill: none;
+      stroke: black;
+      stroke-width: 6;
+      transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .line1 {
+      stroke-dasharray: 60 207;
+      stroke-width: 6;
+    }
+    .line2 {
+      stroke-dasharray: 60 60;
+      stroke-width: 6;
+    }
+    .line3 {
+      stroke-dasharray: 60 207;
+      stroke-width: 6;
+    }
+    .opened .line1 {
+      stroke-dasharray: 90 207;
+      stroke-dashoffset: -134;
+      stroke-width: 6;
+    }
+    .opened .line2 {
+      stroke-dasharray: 1 60;
+      stroke-dashoffset: -30;
+      stroke-width: 6;
+    }
+    .opened .line3 {
+      stroke-dasharray: 90 207;
+      stroke-dashoffset: -134;
+      stroke-width: 6;
+    }
+    
+
+}
+
+header .normalNav {
+    display: flex;
+    align-items: center;
+}
+header .normalNav a{
+  margin-right: 1rem;
+}
+
+header .filterForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2rem;
+}
+header .filterForm svg{
+  transform: translateX(-25px);
+}
+
+header .filterForm .filterInputHeader {
+  font-size: 1rem;
+  background-color: rgb(239, 242, 245);
+  color: rgb(166, 176, 195);
+  border-radius: 8px;
+  cursor: pointer;
+  border: 0;
+  width: 180px;
+  padding: 5px 10px;
+}
+
+header .filterForm .filterInputHeader:focus {
+  outline: none;
+}
+
 .logo {
   font-size: 1.2rem;
   margin-left: 2rem;
@@ -79,10 +222,6 @@ header {
 
 }
 
-header nav a {
-  margin-right: 1rem;
-  padding: 1px;
-}
 
 .fas.fa-star {
   color: var(--primary-color);
@@ -111,17 +250,6 @@ a:hover {
 .pagesCount a.active {
   border-bottom: 2px solid black;
   color: var(--primary-color);
-}
-
-.filterInput {
-  	font-size: 1rem;
-    padding: 0 .2rem;
-    width: 320px;
-    border: 1px solid var(--primary-color);
-}
-
-.filterInput:focus {
-  outline: none;
 }
 
 

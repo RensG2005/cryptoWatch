@@ -4,7 +4,6 @@ import NProgress from 'nprogress'
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Header from "../components/Header";
 
 NProgress.configure({ showSpinner: false });
 Router.onRouteChangeStart = () => {
@@ -15,12 +14,10 @@ Router.onRouteChangeError = () => NProgress.done()
 
 
 function MyApp({ Component, pageProps }) {
-  
-  document.documentElement.lang = 'en-us'
-
   useEffect(() => {
-		AOS.init({
-			delay: 90,
+    document.documentElement.lang = 'en-us'
+    AOS.init({
+      delay: 90,
 			duration: 400,
       offset: 10,
 		});
@@ -28,7 +25,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-        <Header />
         <Component {...pageProps} />
     </>
   ) 

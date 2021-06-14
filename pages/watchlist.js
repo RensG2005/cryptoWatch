@@ -6,12 +6,12 @@ import Image from 'next/image'
 import millify from "millify";
 import dateFormat from 'dateformat'
 import Head from "next/head";
+import Header from "../components/Header";
 
 export default function watchlist() {
 
     const [data, setData] = useState([])
     const [noData, setNoData] = useState(false)
-    const [arr, setArr] = useState(false)
 
     let getData;
 
@@ -64,6 +64,7 @@ export default function watchlist() {
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
                 integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
         </Head>
+        <Header searchDisabled={true} />
         <main>
         <ul className="responsive-table"> 
             {data.length > 0 && <li className="table-header">

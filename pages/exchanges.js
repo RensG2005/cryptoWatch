@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ScrollToTop from "react-scroll-to-top";
 import ExchangeRow from "../components/tablerows/ExchangeRow";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 export default function Exchange({data, reversed}) {
 
@@ -29,6 +30,8 @@ export default function Exchange({data, reversed}) {
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" 
                 integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
         </Head>
+
+        <Header />
         <main>
         <ScrollToTop smooth />
         <ul className="responsive-table"> 

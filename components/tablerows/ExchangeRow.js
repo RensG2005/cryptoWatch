@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react'
 import millify from "millify";
 import dateFormat from 'dateformat'
 import Link from 'next/link'
@@ -7,8 +6,7 @@ import Image from 'next/image'
 
 function TableRowHomepage({exchange, index}) {
     return (
-        <Fragment key={exchange.id}>    
-            <li className="table-row"  data-aos="fade-up">
+            <li className="table-row"  data-aos="fade-up" key={exchange.id}>
                 <div className="col col-1" data-label="Index">{index+1}</div>
                 <div className="col col-2" data-label="Crypto Name">       
                     <Link href={`exchange/${exchange.id}`}>
@@ -39,8 +37,7 @@ function TableRowHomepage({exchange, index}) {
             <div className="col col-8" data-label="Last Updated">
                 {dateFormat(new Date(),  "mmmm dS, yyyy, h:MM").toString()}
             </div>
-            </li>
-        </Fragment>
+        </li>
     )
 }
 
