@@ -64,7 +64,7 @@ margin-left: 5px;
 font-size: 1rem;
 }
 
-@media (max-width: 793px) {
+@media (max-width: 800px) {
 .responsive-table .table-header {
     display: none;
 }

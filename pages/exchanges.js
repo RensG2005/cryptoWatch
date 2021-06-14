@@ -11,6 +11,7 @@ export default function Exchange({data, reversed}) {
 
   const [reverse, setReverse] = useState(false)
   const [filteredData, setFilterdData] = useState([])
+  const [filter, setFilter] = useState("")
 
   useEffect(() => {
     if(reverse) {
@@ -19,6 +20,19 @@ export default function Exchange({data, reversed}) {
     }
     setFilterdData(data)
   }, [reverse])
+
+    useEffect(() => {
+    let timeoutId = setTimeout(() => {
+      const regexp = new RegExp(filter, 'gi');
+      setFilterdData(data.filter((exchange) => {
+        console.log(exchange)
+        return exchange.name.match(regexp) || exchange.id.match(regexp);
+      }));
+    }, 500);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [filter]);
 
 
     return (
@@ -31,7 +45,7 @@ export default function Exchange({data, reversed}) {
                 integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossOrigin="anonymous"></link>
         </Head>
 
-        <Header />
+        <Header setFilter={setFilter} />
         <main>
         <ScrollToTop smooth />
         <ul className="responsive-table"> 

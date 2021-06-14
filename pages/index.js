@@ -36,7 +36,6 @@ export default function Home({data, reversedData}) {
     if (typeof window !== 'undefined') {
       setArr(JSON.parse(localStorage.getItem("watchlist")) || [])
     }
-
   }, [])
      
   return (
