@@ -30,12 +30,10 @@ function coin({data, page, reversedData}) {
     useEffect(() => {
       let timeoutId = setTimeout(() => {
         const regexp = new RegExp(filter, 'gi');
-        console.log(reverse)
+        (reverse)
         setFilteredCoins(data.filter((coin) => {
             return coin.name.match(regexp) || coin.symbol.match(regexp);
         }));
-        console.log(reverse)
-
       }, 500);
       return () => {
         clearTimeout(timeoutId);

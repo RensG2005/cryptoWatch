@@ -44,7 +44,6 @@ export default function watchlist() {
 
         if(favos.length > 0) {
             let filtered = favos.filter(value => {
-                console.log(value, id)
                 return value !== id
             })
             localStorage.setItem("watchlist", JSON.stringify(filtered))

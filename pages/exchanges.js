@@ -25,8 +25,7 @@ export default function Exchange({data, reversed}) {
     let timeoutId = setTimeout(() => {
       const regexp = new RegExp(filter, 'gi');
       setFilterdData(data.filter((exchange) => {
-        console.log(exchange)
-        return exchange.name.match(regexp) || exchange.id.match(regexp);
+        return exchange.name.match(regexp) || exchange.symbol.match(regexp);
       }));
     }, 500);
     return () => {

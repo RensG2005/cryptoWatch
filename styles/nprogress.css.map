@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAA;EACN,cAAc,EAAC,IACjB;CAAC;;AACD,AAAA,UAAU,CAAC,IAAI,CAAA;EACb,UAAU,EAAC,oBAAoB;EAC/B,QAAQ,EAAC,KAAK;EACd,OAAO,EAAC,IAAI;EACZ,GAAG,EAAC,CAAC;EACL,IAAI,EAAC,CAAC;EACN,KAAK,EAAC,IAAI;EACV,MAAM,EAAC,GACT;CAAC",
+    "sources": [
+        "nprogress.scss"
+    ],
+    "names": [],
+    "file": "nprogress.css"
+}
