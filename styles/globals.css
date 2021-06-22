@@ -14,10 +14,11 @@ body {
 
 :root {
   --primary-color: #3861fb;
+  --primary-color-dark: #4a5fc1;
 }
 
 a {
-  color: inherit;
+  color: var(--primary-color-dark);
   text-decoration: none;
   cursor: pointer;
 }
@@ -42,6 +43,7 @@ main {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  min-height: 84vh;
 }
 
 footer {
@@ -65,12 +67,29 @@ footer {
 
 footer p {
   text-align: center;
-  margin: 0;
+  margin: .5rem 0;
   padding: 0;
 }
 
 footer a {
   color: var(--primary-color);
+}
+
+.loaderskeleton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+}
+
+.loaderskeleton * {
+  width: 100%;
 }
 
 .red {

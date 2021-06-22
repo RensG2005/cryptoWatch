@@ -8,7 +8,6 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 export default function Exchange({data, reversed}) {
-
   const [reverse, setReverse] = useState(false)
   const [filteredData, setFilterdData] = useState([])
   const [filter, setFilter] = useState("")
@@ -23,11 +22,11 @@ export default function Exchange({data, reversed}) {
 
     useEffect(() => {
     let timeoutId = setTimeout(() => {
-      const regexp = new RegExp(filter, 'gi');
+      const regexp = new RegExp(filter, 'gi')
       setFilterdData(data.filter((exchange) => {
-        return exchange.name.match(regexp) || exchange.symbol.match(regexp);
+        return exchange.name.match(regexp) || exchange.id.match(regexp)
       }));
-    }, 500);
+    }, 500)
     return () => {
       clearTimeout(timeoutId);
     };
@@ -47,6 +46,8 @@ export default function Exchange({data, reversed}) {
         <Header setFilter={setFilter} />
         <main>
         <ScrollToTop smooth />
+
+
         <ul className="responsive-table"> 
           <li className="table-header">
             <div className="col col-1">#
@@ -65,9 +66,10 @@ export default function Exchange({data, reversed}) {
         </li>
               {filteredData.map((exchange, index) => {
                 return (
-                  <ExchangeRow exchange={exchange} index={index} />
-                )}
-          )} 
+                  	<ExchangeRow exchange={exchange} index={index} />
+                  )}
+              )} 
+
           </ul>
         </main>
           <Footer />

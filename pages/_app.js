@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import Router from 'next/router'
 import NProgress from 'nprogress'
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -14,7 +14,7 @@ Router.onRouteChangeError = () => NProgress.done()
 
 
 function MyApp({ Component, pageProps }) {
-  useLayoutEffect(() => {
+  useEffect(() => {
     document.documentElement.lang = 'en-us'
     AOS.init({
       delay: 90,

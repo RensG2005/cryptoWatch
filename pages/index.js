@@ -3,10 +3,12 @@ import CoinGecko from 'coingecko-api'
 const CoinGeckoClient = new CoinGecko()
 import ScrollToTop from 'react-scroll-to-top'
 import { useEffect, useState } from "react";
-import TableRowHomepage from "../components/tablerows/TableRowHomepage";
+import React, {lazy, Suspense} from 'react';
+const TableRowHomepage = lazy(() => import("../components/tablerows/TableRowHomepage"));
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import ContentLoader from "react-content-loader"
 
 
 export default function Home({data, reversedData}) {
@@ -27,9 +29,9 @@ export default function Home({data, reversedData}) {
         return coin.name.match(regexp) || coin.symbol.match(regexp);
       }));
     }, 500);
-    return () => {
+    return (() => {
       clearTimeout(timeoutId);
-    };
+    })
   }, [filter]);
 
   useEffect(() => {
@@ -70,8 +72,17 @@ export default function Home({data, reversedData}) {
             
         </li>
               {filteredCoins.map((coin, index) => {
-                return <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />
-              })}
+                return (
+                    <Suspense key={index} fallback={
+                      <div className="loaderskeleton">
+                        <ContentLoader backgroundColor="#f3f3f3" foregroundColor="#ecebeb"speed={3} width={2000} height={60} viewBox={"0 0 2000 60"}>
+                        <rect x="190" y="10" rx="3" ry="3" width="1500" height="60" /> 
+                      </ContentLoader>
+                      </div>
+                    }>
+                      <TableRowHomepage coin={coin} index={index} arr={arr} setArr={setArr} key={coin.id} />
+                    </Suspense>
+              )})}
           </ul>
           <section className="pagesCount">
                   <Link href="#">
