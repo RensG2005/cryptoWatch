@@ -122,7 +122,7 @@ function coin({data, page, reversedData}) {
 export async function getServerSideProps(context) {
     try {
         const {page} = context.query
-        if(page > 77 || page < 1) {
+        if(page > 80 || page < 1) {
             return {
                 redirect: {
                   destination: '/404',
