@@ -18,6 +18,8 @@ function TableRowHomepage({coin, index, arr, setArr}) {
     localStorage.setItem("watchlist", JSON.stringify(favorites))
   }
 
+//   let {id, image, name, symbol, price: market_data.current_price.usd, }
+
 
     return (
         <Fragment key={coin.id}>    
